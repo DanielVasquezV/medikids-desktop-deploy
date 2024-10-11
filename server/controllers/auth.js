@@ -151,7 +151,7 @@ const verify_email = async (req, res, next) => {
     }
 
     // CHECK IF EMAIL HAS ALREADY VERIFIED
-    const [query_check_ve_co] = await pool.query('SELECT * FROM Responsible WHERE Email = ? ', [Email]);
+    const [query_check_ve_co] = await pool.query('SELECT * FROM responsible WHERE Email = ? ', [Email]);
     if (query_check_ve_co[0].Email_Verify_code == null) {
       return res.status(500).json({success: false, message: {es: 'Email ya vericado.', en: 'Email already verified.'}});
     }
@@ -226,7 +226,7 @@ const check_reset_code = async (req, res, next) => {
     const date_now = new Date();
 
     // GET THE USER WITH THE EMAIL
-    const [query_user] = await pool.query('SELECT * FROM Responsible WHERE Reset_Pass_Token = ? AND Reset_Pass_Expire > ?', [code_to_match, date_now]);
+    const [query_user] = await pool.query('SELECT * FROM responsible WHERE Reset_Pass_Token = ? AND Reset_Pass_Expire > ?', [code_to_match, date_now]);
     if (query_user.length == 0) {
       return res.status(500).json({success: false, message: {es: 'Código Invalido.', en: 'Invalid Code.'}});
     }
