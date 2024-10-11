@@ -157,7 +157,7 @@ const verify_email = async (req, res, next) => {
     }
 
     // GET THE USER WITH THE VERIFY CODE TO VALIDATE IT AT ONCE
-    const [query_user] = await pool.query('SELECT * FROM Responsible WHERE Email = ? AND Email_Verify_code = ?', [Email, verify_code]);
+    const [query_user] = await pool.query('SELECT * FROM responsible WHERE Email = ? AND Email_Verify_code = ?', [Email, verify_code]);
     if (query_user.length == 0) {
       return res.status(500).json({success: false, message: {es: 'Código Incorrecto.', en: 'Incorrect Code.'}});
     }
@@ -256,7 +256,7 @@ const reset_password = async (req, res, next) => {
     }
 
     // CHECK IF THE PASSWORD IS THE SAME WITH THE OLD ONE;
-    const [query_user] = await pool.query('SELECT * FROM Responsible WHERE Email = ?', [Email]);
+    const [query_user] = await pool.query('SELECT * FROM responsible WHERE Email = ?', [Email]);
     if (await bcrypt.compare(Password, query_user[0].Password)) {
       return res.status(500).json({success: false, message: {es: 'Contraseña no puede ser igual \na la anterior', en: 'The password cannot be the same \nas the previous one.'}});
     }
