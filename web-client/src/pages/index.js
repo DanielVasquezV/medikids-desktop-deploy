@@ -1,0 +1,13 @@
+export { HomePage } from "./HomePage";
+export { DownloadApp } from "./DownloadApp";
+export { DrFlores } from "./Doctors/DrFlores"
+export { DrGuzman } from "./Doctors/DrGuzman"
+export { DraGarza } from "./Doctors/DraGarza"
+export { Doc1 } from "./Doc1";
+export { Doc2 } from "./Doc2";
+export { Doc3 } from "./Doc3"
+export { Citas } from "./Citas"
+export { Sobre } from "./Sobre"
+export { Contact } from "./Contact"
+export { Error404 } from "./Error404"
+export { Terminos } from './Terminos'
