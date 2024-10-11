@@ -2,7 +2,8 @@ import axios from "axios";
 
 //! host Direction of the server.
 // const host = 'https://medikids-server.uc.r.appspot.com';
-const host = 'http://192.168.1.6:5005'
+// const host = 'http://192.168.1.6:5005'
+const host = 'https://medikids-server.vercel.app';
 
 //\\ const of headers
 const headers_public = { headers: {'Content-Type': 'application/json'} }
