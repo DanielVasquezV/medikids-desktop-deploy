@@ -36,11 +36,12 @@
 import sgMail from '@sendgrid/mail';
 import { config_env } from './dotenv_conf.js';
 
-const SendEmail = async (options) => {
+sgMail.setApiKey(config_env.SENDGRID_API_KEY);
 
+const SendEmail = async (options) => {
   const msg = {
     to: options.to,
-    from: config_env.EMAIL_FROM,
+    from: config_env.EMAIL_FROMSG,
     subject: options.subject,
     html: options.text,
   };
