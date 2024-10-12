@@ -1,48 +1,34 @@
 import nodemailer from 'nodemailer';
 import { config_env } from './dotenv_conf.js';
 
-const SendEmail = async (options) => {
-  // Crear el transportador
+const SendEmail = (options) => {
+  // SET THE CONFIG TO THE TRANSPORT THE EMAIL
   const transporter = nodemailer.createTransport({
-    host: config_env.EMAIL_HOST,
-    port: config_env.EMAIL_PORT,
-    secure: true,
-    auth: {
-      user: config_env.EMAIL_USERNAME,
-      pass: config_env.EMAIL_PASSWORD,
-    },
-  });
-
-  await new Promise((resolve, reject) => {
-    transporter.verify(function (error, success) {
-      if (error) {
-        console.log("Error al verificar el transportador:", error);
-        reject(error);
-      } else {
-        console.log("Servidor de correo listo para enviar mensajes");
-        resolve(success);
+      host: config_env.EMAIL_HOST,
+      port: config_env.EMAIL_PORT,
+      secure: true,
+      auth: {
+        user: config_env.EMAIL_USERNAME,
+        pass: config_env.EMAIL_PASSWORD
       }
     });
-  });
-
-  const mailOptions = {
-    from: config_env.EMAIL_FROM,
-    to: options.to,
-    subject: options.subject,
-    html: options.text,
-  };
-
-  await new Promise((resolve, reject) => {
-    transporter.sendMail(mailOptions, (err, info) => {
+  
+    // SET THE ELEMENTS OF THE EMAIL
+    const mailOptions = {
+      from: config_env.EMAIL_FROM,
+      to: options.to,
+      subject: options.subject,
+      html: options.text
+    }
+  
+    // FUNCTION TO SEND THE EMAIL AND GET BACK THE INFO
+    transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
-        console.error("Error al enviar el correo:", err);
-        reject(err);
+        console.log(err)
       } else {
-        console.log("Correo enviado con éxito:", info);
-        resolve(info);
+        console.log(info)
       }
-    });
-  });
-};
+    })
+} 
 
 export { SendEmail };
